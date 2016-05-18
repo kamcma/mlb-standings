@@ -1,0 +1,17 @@
+body {
+    background-color: #006600;
+    color: #ffffff;
+    font-weight: bold;
+}
+table {
+    background-color: #005000;
+}
+th {
+    text-align: center;
+}
+td {
+    text-align: right;
+}
+.teamName {
+    text-align: left;
+}

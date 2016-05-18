@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>MLB Standings</title>
+</head>
+<body>
+    <div class="container">
+        <!--<h1 align="center">Standings</h1>-->
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <h2 align="center">American League</h2>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 align="center">East</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tr class="hidden-md hidden-lg">
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>%</th>
+                                <th>GB</th>
+                                <th>RΔ</th>
+                            </tr>
+                            <tr class="hidden-xs hidden-sm">
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Percentage</th>
+                                <th>Games Back</th>
+                                <th>Run Diff</th>
+                            </tr>
+                            <tr>
+                                <td id="alEastFirstName" class="teamName">teamName</td>
+                                <td id="alEastFirstWs">0</td>
+                                <td id="alEastFirstLs">0</td>
+                                <td id="alEastFirstPer">0</td>
+                                <td id="alEastFirstGB"></td>
+                                <td id="alEastFirstDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alEastSecondName" class="teamName">teamName</td>
+                                <td id="alEastSecondWs">0</td>
+                                <td id="alEastSecondLs">0</td>
+                                <td id="alEastSecondPer">0</td>
+                                <td id="alEastSecondGB">0</td>
+                                <td id="alEastSecondDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alEastThirdName" class="teamName">teamName</td>
+                                <td id="alEastThirdWs">0</td>
+                                <td id="alEastThirdLs">0</td>
+                                <td id="alEastThirdPer">0</td>
+                                <td id="alEastThirdGB">0</td>
+                                <td id="alEastThirdDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alEastFourthName" class="teamName">teamName</td>
+                                <td id="alEastFourthWs">0</td>
+                                <td id="alEastFourthLs">0</td>
+                                <td id="alEastFourthPer">0</td>
+                                <td id="alEastFourthGB">0</td>
+                                <td id="alEastFourthDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alEastFifthName" class="teamName">teamName</td>
+                                <td id="alEastFifthWs">0</td>
+                                <td id="alEastFifthLs">0</td>
+                                <td id="alEastFifthPer">0</td>
+                                <td id="alEastFifthGB">0</td>
+                                <td id="alEastFifthDiff">0</td>
+                            </tr>                               
+                        </table>
+                    </div>
+                    <div class="col-xs-12">
+                        <h3 align="center">Central</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tr class="hidden-md hidden-lg">
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>%</th>
+                                <th>GB</th>
+                                <th>RΔ</th>
+                            </tr>
+                            <tr class="hidden-xs hidden-sm">
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Percentage</th>
+                                <th>Games Back</th>
+                                <th>Run Diff</th>
+                            </tr>
+                            <tr>
+                                <td id="alCentralFirstName" class="teamName">teamName</td>
+                                <td id="alCentralFirstWs">0</td>
+                                <td id="alCentralFirstLs">0</td>
+                                <td id="alCentralFirstPer">0</td>
+                                <td id="alCentralFirstGB"></td>
+                                <td id="alCentralFirstDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alCentralSecondName" class="teamName">teamName</td>
+                                <td id="alCentralSecondWs">0</td>
+                                <td id="alCentralSecondLs">0</td>
+                                <td id="alCentralSecondPer">0</td>
+                                <td id="alCentralSecondGB">0</td>
+                                <td id="alCentralSecondDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alCentralThirdName" class="teamName">teamName</td>
+                                <td id="alCentralThirdWs">0</td>
+                                <td id="alCentralThirdLs">0</td>
+                                <td id="alCentralThirdPer">0</td>
+                                <td id="alCentralThirdGB">0</td>
+                                <td id="alCentralThirdDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alCentralFourthName" class="teamName">teamName</td>
+                                <td id="alCentralFourthWs">0</td>
+                                <td id="alCentralFourthLs">0</td>
+                                <td id="alCentralFourthPer">0</td>
+                                <td id="alCentralFourthGB">0</td>
+                                <td id="alCentralFourthDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alCentralFifthName" class="teamName">teamName</td>
+                                <td id="alCentralFifthWs">0</td>
+                                <td id="alCentralFifthLs">0</td>
+                                <td id="alCentralFifthPer">0</td>
+                                <td id="alCentralFifthGB">0</td>
+                                <td id="alCentralFifthDiff">0</td>
+                            </tr>                               
+                        </table>
+                    </div>
+                    <div class="col-xs-12">
+                        <h3 align="center">West</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tr class="hidden-md hidden-lg">
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>%</th>
+                                <th>GB</th>
+                                <th>RΔ</th>
+                            </tr>
+                            <tr class="hidden-xs hidden-sm">
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Percentage</th>
+                                <th>Games Back</th>
+                                <th>Run Diff</th>
+                            </tr>
+                            <tr>
+                                <td id="alWestFirstName" class="teamName">teamName</td>
+                                <td id="alWestFirstWs">0</td>
+                                <td id="alWestFirstLs">0</td>
+                                <td id="alWestFirstPer">0</td>
+                                <td id="alWestFirstGB"></td>
+                                <td id="alWestFirstDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alWestSecondName" class="teamName">teamName</td>
+                                <td id="alWestSecondWs">0</td>
+                                <td id="alWestSecondLs">0</td>
+                                <td id="alWestSecondPer">0</td>
+                                <td id="alWestSecondGB">0</td>
+                                <td id="alWestSecondDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alWestThirdName" class="teamName">teamName</td>
+                                <td id="alWestThirdWs">0</td>
+                                <td id="alWestThirdLs">0</td>
+                                <td id="alWestThirdPer">0</td>
+                                <td id="alWestThirdGB">0</td>
+                                <td id="alWestThirdDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alWestFourthName" class="teamName">teamName</td>
+                                <td id="alWestFourthWs">0</td>
+                                <td id="alWestFourthLs">0</td>
+                                <td id="alWestFourthPer">0</td>
+                                <td id="alWestFourthGB">0</td>
+                                <td id="alWestFourthDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="alWestFifthName" class="teamName">teamName</td>
+                                <td id="alWestFifthWs">0</td>
+                                <td id="alWestFifthLs">0</td>
+                                <td id="alWestFifthPer">0</td>
+                                <td id="alWestFifthGB">0</td>
+                                <td id="alWestFifthDiff">0</td>
+                            </tr>                               
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <h2 align="center">National League</h2>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3 align="center">East</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tr class="hidden-md hidden-lg">
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>%</th>
+                                <th>GB</th>
+                                <th>RΔ</th>
+                            </tr>
+                            <tr class="hidden-xs hidden-sm">
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Percentage</th>
+                                <th>Games Back</th>
+                                <th>Run Diff</th>
+                            </tr>
+                            <tr>
+                                <td id="nlEastFirstName" class="teamName">teamName</td>
+                                <td id="nlEastFirstWs">0</td>
+                                <td id="nlEastFirstLs">0</td>
+                                <td id="nlEastFirstPer">0</td>
+                                <td id="nlEastFirstGB"></td>
+                                <td id="nlEastFirstDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlEastSecondName" class="teamName">teamName</td>
+                                <td id="nlEastSecondWs">0</td>
+                                <td id="nlEastSecondLs">0</td>
+                                <td id="nlEastSecondPer">0</td>
+                                <td id="nlEastSecondGB">0</td>
+                                <td id="nlEastSecondDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlEastThirdName" class="teamName">teamName</td>
+                                <td id="nlEastThirdWs">0</td>
+                                <td id="nlEastThirdLs">0</td>
+                                <td id="nlEastThirdPer">0</td>
+                                <td id="nlEastThirdGB">0</td>
+                                <td id="nlEastThirdDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlEastFourthName" class="teamName">teamName</td>
+                                <td id="nlEastFourthWs">0</td>
+                                <td id="nlEastFourthLs">0</td>
+                                <td id="nlEastFourthPer">0</td>
+                                <td id="nlEastFourthGB">0</td>
+                                <td id="nlEastFourthDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlEastFifthName" class="teamName">teamName</td>
+                                <td id="nlEastFifthWs">0</td>
+                                <td id="nlEastFifthLs">0</td>
+                                <td id="nlEastFifthPer">0</td>
+                                <td id="nlEastFifthGB">0</td>
+                                <td id="nlEastFifthDiff">0</td>
+                            </tr>                               
+                        </table>
+                    </div>
+                    <div class="col-xs-12">
+                        <h3 align="center">Central</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tr class="hidden-md hidden-lg">
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>%</th>
+                                <th>GB</th>
+                                <th>RΔ</th>
+                            </tr>
+                            <tr class="hidden-xs hidden-sm">
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Percentage</th>
+                                <th>Games Back</th>
+                                <th>Run Diff</th>
+                            </tr>
+                            <tr>
+                                <td id="nlCentralFirstName" class="teamName">teamName</td>
+                                <td id="nlCentralFirstWs">0</td>
+                                <td id="nlCentralFirstLs">0</td>
+                                <td id="nlCentralFirstPer">0</td>
+                                <td id="nlCentralFirstGB"></td>
+                                <td id="nlCentralFirstDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlCentralSecondName" class="teamName">teamName</td>
+                                <td id="nlCentralSecondWs">0</td>
+                                <td id="nlCentralSecondLs">0</td>
+                                <td id="nlCentralSecondPer">0</td>
+                                <td id="nlCentralSecondGB">0</td>
+                                <td id="nlCentralSecondDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlCentralThirdName" class="teamName">teamName</td>
+                                <td id="nlCentralThirdWs">0</td>
+                                <td id="nlCentralThirdLs">0</td>
+                                <td id="nlCentralThirdPer">0</td>
+                                <td id="nlCentralThirdGB">0</td>
+                                <td id="nlCentralThirdDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlCentralFourthName" class="teamName">teamName</td>
+                                <td id="nlCentralFourthWs">0</td>
+                                <td id="nlCentralFourthLs">0</td>
+                                <td id="nlCentralFourthPer">0</td>
+                                <td id="nlCentralFourthGB">0</td>
+                                <td id="nlCentralFourthDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlCentralFifthName" class="teamName">teamName</td>
+                                <td id="nlCentralFifthWs">0</td>
+                                <td id="nlCentralFifthLs">0</td>
+                                <td id="nlCentralFifthPer">0</td>
+                                <td id="nlCentralFifthGB">0</td>
+                                <td id="nlCentralFifthDiff">0</td>
+                            </tr>                               
+                        </table>
+                    </div>
+                    <div class="col-xs-12">
+                        <h3 align="center">West</h3>
+                        <table class="table table-bordered table-condensed">
+                            <tr class="hidden-md hidden-lg">
+                                <th></th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>%</th>
+                                <th>GB</th>
+                                <th>RΔ</th>
+                            </tr>
+                            <tr class="hidden-xs hidden-sm">
+                                <th></th>
+                                <th>Wins</th>
+                                <th>Losses</th>
+                                <th>Percentage</th>
+                                <th>Games Back</th>
+                                <th>Run Diff</th>
+                            </tr>
+                            <tr>
+                                <td id="nlWestFirstName" class="teamName">teamName</td>
+                                <td id="nlWestFirstWs">0</td>
+                                <td id="nlWestFirstLs">0</td>
+                                <td id="nlWestFirstPer">0</td>
+                                <td id="nlWestFirstGB"></td>
+                                <td id="nlWestFirstDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlWestSecondName" class="teamName">teamName</td>
+                                <td id="nlWestSecondWs">0</td>
+                                <td id="nlWestSecondLs">0</td>
+                                <td id="nlWestSecondPer">0</td>
+                                <td id="nlWestSecondGB">0</td>
+                                <td id="nlWestSecondDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlWestThirdName" class="teamName">teamName</td>
+                                <td id="nlWestThirdWs">0</td>
+                                <td id="nlWestThirdLs">0</td>
+                                <td id="nlWestThirdPer">0</td>
+                                <td id="nlWestThirdGB">0</td>
+                                <td id="nlWestThirdDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlWestFourthName" class="teamName">teamName</td>
+                                <td id="nlWestFourthWs">0</td>
+                                <td id="nlWestFourthLs">0</td>
+                                <td id="nlWestFourthPer">0</td>
+                                <td id="nlWestFourthGB">0</td>
+                                <td id="nlWestFourthDiff">0</td>
+                            </tr>
+                            <tr>
+                                <td id="nlWestFifthName" class="teamName">teamName</td>
+                                <td id="nlWestFifthWs">0</td>
+                                <td id="nlWestFifthLs">0</td>
+                                <td id="nlWestFifthPer">0</td>
+                                <td id="nlWestFifthGB">0</td>
+                                <td id="nlWestFifthDiff">0</td>
+                            </tr>                               
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>   
+</body>
+</html>

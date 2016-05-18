@@ -39,30 +39,6 @@ var alEast = [
     ["Baltimore", null, null, null]
 ];
 
-var nlEast = [
-    ["Washington", null, null, null],
-    ["New York", null, null, null],
-    ["Miami", null, null, null],
-    ["Philadelphia", null, null, null],
-    ["Atlanta", null, null, null]
-];
-
-var nlCentral = [
-    ["Chicago", null, null, null],
-    ["St. Louis", null, null, null],
-    ["Pittsburgh", null, null, null],
-    ["Milwaukee", null, null, null],
-    ["Cincinnati", null, null, null]
-];
-
-var nlWest = [
-    ["Los Angeles", null, null, null],
-    ["San Francisco", null, null, null],
-    ["San Diego", null, null, null],
-    ["Arizona", null, null, null],
-    ["Colorado", null, null, null]
-];
-
 //Fetch AL East data
 //Yankees data
 var nyaRequest = new XMLHttpRequest();
@@ -327,3 +303,276 @@ document.getElementById("alWestFifthLs").innerText = alWest[4][2];
 document.getElementById("alWestFifthPer").innerText = (alWest[4][1]/(alWest[4][1]+alWest[4][2])).toFixed(3) == 1 ? (alWest[4][1]/(alWest[4][1]+alWest[4][2])).toFixed(3) : (alWest[4][1]/(alWest[4][1]+alWest[4][2])).toFixed(3).toString().substr(1);
 document.getElementById("alWestFifthGB").innerText = ((alWest[0][1] - alWest[4][1]) + (alWest[4][2] - alWest[0][2]))/2 > 0 ? (((alWest[0][1] - alWest[4][1]) + (alWest[4][2] - alWest[0][2]))/2).toFixed(1) : "-";
 document.getElementById("alWestFifthDiff").innerText = alWest[4][3];
+
+var nlEast = [
+    ["Washington", null, null, null],
+    ["New York", null, null, null],
+    ["Miami", null, null, null],
+    ["Philadelphia", null, null, null],
+    ["Atlanta", null, null, null]
+];
+
+//Fetch NL East data
+//Nationals data
+var wasRequest = new XMLHttpRequest();
+wasRequest.open("GET", "http://gd2.mlb.com/components/team/stats/120-stats.xml", false);
+wasRequest.send()
+var wasData = wasRequest.responseXML;
+nlEast[0][1] = parseInt(wasData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"));
+nlEast[0][2] = parseInt(wasData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"));
+nlEast[0][3] = parseInt(wasData.firstChild.nextSibling.firstChild.getAttribute("R")) - parseInt(wasData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"));
+//Mets data
+var nynRequest = new XMLHttpRequest();
+nynRequest.open("GET", "http://gd2.mlb.com/components/team/stats/121-stats.xml", false);
+nynRequest.send()
+var nynData = nynRequest.responseXML;
+nlEast[1][1] = parseInt(nynData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlEast[1][2] = parseInt(nynData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlEast[1][3] = parseInt(nynData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(nynData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Marlins data
+var miaRequest = new XMLHttpRequest();
+miaRequest.open("GET", "http://gd2.mlb.com/components/team/stats/146-stats.xml", false);
+miaRequest.send()
+var miaData = miaRequest.responseXML;
+nlEast[2][1] = parseInt(miaData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlEast[2][2] = parseInt(miaData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlEast[2][3] = parseInt(miaData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(miaData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Phillies data
+var phiRequest = new XMLHttpRequest();
+phiRequest.open("GET", "http://gd2.mlb.com/components/team/stats/143-stats.xml", false);
+phiRequest.send()
+var phiData = phiRequest.responseXML;
+nlEast[3][1] = parseInt(phiData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlEast[3][2] = parseInt(phiData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlEast[3][3] = parseInt(phiData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(phiData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Braves data
+var atlRequest = new XMLHttpRequest();
+atlRequest.open("GET", "http://gd2.mlb.com/components/team/stats/144-stats.xml", false);
+atlRequest.send()
+var atlData = atlRequest.responseXML;
+nlEast[4][1] = parseInt(atlData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlEast[4][2] = parseInt(atlData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlEast[4][3] = parseInt(atlData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(atlData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+
+//Sort NL East teams by record
+nlEast.sort(function (a, b) {
+    return b[1] / b[2] - a[1] / a[2];
+});
+
+//Put NL East data on page
+document.getElementById("nlEastFirstName").innerText = nlEast[0][0];
+document.getElementById("nlEastFirstWs").innerText = nlEast[0][1];
+document.getElementById("nlEastFirstLs").innerText = nlEast[0][2];
+document.getElementById("nlEastFirstPer").innerText = (nlEast[0][1]/(nlEast[0][1]+nlEast[0][2])).toFixed(3) == 1 ? (nlEast[0][1]/(nlEast[0][1]+nlEast[0][2])).toFixed(3) : (nlEast[0][1]/(nlEast[0][1]+nlEast[0][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlEastFirstGB").innerText = ((nlEast[1][1] - nlEast[0][1]) + (nlEast[0][2] - nlEast[1][2]))/2 > 0 ? (((nlEast[1][1] - nlEast[0][1]) + (nlEast[0][2] - nlEast[1][2]))/2).toFixed(1) : "-";
+document.getElementById("nlEastFirstDiff").innerText = nlEast[0][3];
+
+document.getElementById("nlEastSecondName").innerText = nlEast[1][0];
+document.getElementById("nlEastSecondWs").innerText = nlEast[1][1];
+document.getElementById("nlEastSecondLs").innerText = nlEast[1][2];
+document.getElementById("nlEastSecondPer").innerText = (nlEast[1][1]/(nlEast[1][1]+nlEast[1][2])).toFixed(3) == 1 ? (nlEast[1][1]/(nlEast[1][1]+nlEast[1][2])).toFixed(3) : (nlEast[1][1]/(nlEast[1][1]+nlEast[1][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlEastSecondGB").innerText = ((nlEast[0][1] - nlEast[1][1]) + (nlEast[1][2] - nlEast[0][2]))/2 > 0 ? (((nlEast[0][1] - nlEast[1][1]) + (nlEast[1][2] - nlEast[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlEastSecondDiff").innerText = nlEast[1][3];
+
+document.getElementById("nlEastThirdName").innerText = nlEast[2][0];
+document.getElementById("nlEastThirdWs").innerText = nlEast[2][1];
+document.getElementById("nlEastThirdLs").innerText = nlEast[2][2];
+document.getElementById("nlEastThirdPer").innerText = (nlEast[2][1]/(nlEast[2][1]+nlEast[2][2])).toFixed(3) == 1 ? (nlEast[2][1]/(nlEast[2][1]+nlEast[2][2])).toFixed(3) : (nlEast[2][1]/(nlEast[2][1]+nlEast[2][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlEastThirdGB").innerText = ((nlEast[0][1] - nlEast[2][1]) + (nlEast[2][2] - nlEast[0][2]))/2 > 0 ? (((nlEast[0][1] - nlEast[2][1]) + (nlEast[2][2] - nlEast[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlEastThirdDiff").innerText = nlEast[2][3];
+
+document.getElementById("nlEastFourthName").innerText = nlEast[3][0];
+document.getElementById("nlEastFourthWs").innerText = nlEast[3][1];
+document.getElementById("nlEastFourthLs").innerText = nlEast[3][2];
+document.getElementById("nlEastFourthPer").innerText = (nlEast[3][1]/(nlEast[3][1]+nlEast[3][2])).toFixed(3) == 1 ? (nlEast[3][1]/(nlEast[3][1]+nlEast[3][2])).toFixed(3) : (nlEast[3][1]/(nlEast[3][1]+nlEast[3][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlEastFourthGB").innerText = ((nlEast[0][1] - nlEast[3][1]) + (nlEast[3][2] - nlEast[0][2]))/2 > 0 ? (((nlEast[0][1] - nlEast[3][1]) + (nlEast[3][2] - nlEast[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlEastFourthDiff").innerText = nlEast[3][3];
+
+document.getElementById("nlEastFifthName").innerText = nlEast[4][0];
+document.getElementById("nlEastFifthWs").innerText = nlEast[4][1];
+document.getElementById("nlEastFifthLs").innerText = nlEast[4][2];
+document.getElementById("nlEastFifthPer").innerText = (nlEast[4][1]/(nlEast[4][1]+nlEast[4][2])).toFixed(3) == 1 ? (nlEast[4][1]/(nlEast[4][1]+nlEast[4][2])).toFixed(3) : (nlEast[4][1]/(nlEast[4][1]+nlEast[4][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlEastFifthGB").innerText = ((nlEast[0][1] - nlEast[4][1]) + (nlEast[4][2] - nlEast[0][2]))/2 > 0 ? (((nlEast[0][1] - nlEast[4][1]) + (nlEast[4][2] - nlEast[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlEastFifthDiff").innerText = nlEast[4][3];
+
+var nlCentral = [
+    ["Chicago", null, null, null],
+    ["St. Louis", null, null, null],
+    ["Pittsburgh", null, null, null],
+    ["Milwaukee", null, null, null],
+    ["Cincinnati", null, null, null]
+];
+
+//Fetch NL Central data
+//Cubs data
+var chnRequest = new XMLHttpRequest();
+chnRequest.open("GET", "http://gd2.mlb.com/components/team/stats/112-stats.xml", false);
+chnRequest.send()
+var chnData = chnRequest.responseXML;
+nlCentral[0][1] = parseInt(chnData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"));
+nlCentral[0][2] = parseInt(chnData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"));
+nlCentral[0][3] = parseInt(chnData.firstChild.nextSibling.firstChild.getAttribute("R")) - parseInt(chnData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"));
+//Cardinals data
+var stlRequest = new XMLHttpRequest();
+stlRequest.open("GET", "http://gd2.mlb.com/components/team/stats/138-stats.xml", false);
+stlRequest.send()
+var stlData = stlRequest.responseXML;
+nlCentral[1][1] = parseInt(stlData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlCentral[1][2] = parseInt(stlData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlCentral[1][3] = parseInt(stlData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(stlData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Pirates data
+var pitRequest = new XMLHttpRequest();
+pitRequest.open("GET", "http://gd2.mlb.com/components/team/stats/134-stats.xml", false);
+pitRequest.send()
+var pitData = pitRequest.responseXML;
+nlCentral[2][1] = parseInt(pitData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlCentral[2][2] = parseInt(pitData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlCentral[2][3] = parseInt(pitData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(pitData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Brewers data
+var milRequest = new XMLHttpRequest();
+milRequest.open("GET", "http://gd2.mlb.com/components/team/stats/158-stats.xml", false);
+milRequest.send()
+var milData = milRequest.responseXML;
+nlCentral[3][1] = parseInt(milData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlCentral[3][2] = parseInt(milData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlCentral[3][3] = parseInt(milData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(milData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Reds data
+var cinRequest = new XMLHttpRequest();
+cinRequest.open("GET", "http://gd2.mlb.com/components/team/stats/113-stats.xml", false);
+cinRequest.send()
+var cinData = cinRequest.responseXML;
+nlCentral[4][1] = parseInt(cinData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlCentral[4][2] = parseInt(cinData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlCentral[4][3] = parseInt(cinData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(cinData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+
+//Sort NL Central teams by record
+nlCentral.sort(function (a, b) {
+    return b[1] / b[2] - a[1] / a[2];
+});
+
+//Put NL Central data on page
+document.getElementById("nlCentralFirstName").innerText = nlCentral[0][0];
+document.getElementById("nlCentralFirstWs").innerText = nlCentral[0][1];
+document.getElementById("nlCentralFirstLs").innerText = nlCentral[0][2];
+document.getElementById("nlCentralFirstPer").innerText = (nlCentral[0][1]/(nlCentral[0][1]+nlCentral[0][2])).toFixed(3) == 1 ? (nlCentral[0][1]/(nlCentral[0][1]+nlCentral[0][2])).toFixed(3) : (nlCentral[0][1]/(nlCentral[0][1]+nlCentral[0][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlCentralFirstGB").innerText = ((nlCentral[1][1] - nlCentral[0][1]) + (nlCentral[0][2] - nlCentral[1][2]))/2 > 0 ? (((nlCentral[1][1] - nlCentral[0][1]) + (nlCentral[0][2] - nlCentral[1][2]))/2).toFixed(1) : "-";
+document.getElementById("nlCentralFirstDiff").innerText = nlCentral[0][3];
+
+document.getElementById("nlCentralSecondName").innerText = nlCentral[1][0];
+document.getElementById("nlCentralSecondWs").innerText = nlCentral[1][1];
+document.getElementById("nlCentralSecondLs").innerText = nlCentral[1][2];
+document.getElementById("nlCentralSecondPer").innerText = (nlCentral[1][1]/(nlCentral[1][1]+nlCentral[1][2])).toFixed(3) == 1 ? (nlCentral[1][1]/(nlCentral[1][1]+nlCentral[1][2])).toFixed(3) : (nlCentral[1][1]/(nlCentral[1][1]+nlCentral[1][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlCentralSecondGB").innerText = ((nlCentral[0][1] - nlCentral[1][1]) + (nlCentral[1][2] - nlCentral[0][2]))/2 > 0 ? (((nlCentral[0][1] - nlCentral[1][1]) + (nlCentral[1][2] - nlCentral[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlCentralSecondDiff").innerText = nlCentral[1][3];
+
+document.getElementById("nlCentralThirdName").innerText = nlCentral[2][0];
+document.getElementById("nlCentralThirdWs").innerText = nlCentral[2][1];
+document.getElementById("nlCentralThirdLs").innerText = nlCentral[2][2];
+document.getElementById("nlCentralThirdPer").innerText = (nlCentral[2][1]/(nlCentral[2][1]+nlCentral[2][2])).toFixed(3) == 1 ? (nlCentral[2][1]/(nlCentral[2][1]+nlCentral[2][2])).toFixed(3) : (nlCentral[2][1]/(nlCentral[2][1]+nlCentral[2][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlCentralThirdGB").innerText = ((nlCentral[0][1] - nlCentral[2][1]) + (nlCentral[2][2] - nlCentral[0][2]))/2 > 0 ? (((nlCentral[0][1] - nlCentral[2][1]) + (nlCentral[2][2] - nlCentral[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlCentralThirdDiff").innerText = nlCentral[2][3];
+
+document.getElementById("nlCentralFourthName").innerText = nlCentral[3][0];
+document.getElementById("nlCentralFourthWs").innerText = nlCentral[3][1];
+document.getElementById("nlCentralFourthLs").innerText = nlCentral[3][2];
+document.getElementById("nlCentralFourthPer").innerText = (nlCentral[3][1]/(nlCentral[3][1]+nlCentral[3][2])).toFixed(3) == 1 ? (nlCentral[3][1]/(nlCentral[3][1]+nlCentral[3][2])).toFixed(3) : (nlCentral[3][1]/(nlCentral[3][1]+nlCentral[3][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlCentralFourthGB").innerText = ((nlCentral[0][1] - nlCentral[3][1]) + (nlCentral[3][2] - nlCentral[0][2]))/2 > 0 ? (((nlCentral[0][1] - nlCentral[3][1]) + (nlCentral[3][2] - nlCentral[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlCentralFourthDiff").innerText = nlCentral[3][3];
+
+document.getElementById("nlCentralFifthName").innerText = nlCentral[4][0];
+document.getElementById("nlCentralFifthWs").innerText = nlCentral[4][1];
+document.getElementById("nlCentralFifthLs").innerText = nlCentral[4][2];
+document.getElementById("nlCentralFifthPer").innerText = (nlCentral[4][1]/(nlCentral[4][1]+nlCentral[4][2])).toFixed(3) == 1 ? (nlCentral[4][1]/(nlCentral[4][1]+nlCentral[4][2])).toFixed(3) : (nlCentral[4][1]/(nlCentral[4][1]+nlCentral[4][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlCentralFifthGB").innerText = ((nlCentral[0][1] - nlCentral[4][1]) + (nlCentral[4][2] - nlCentral[0][2]))/2 > 0 ? (((nlCentral[0][1] - nlCentral[4][1]) + (nlCentral[4][2] - nlCentral[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlCentralFifthDiff").innerText = nlCentral[4][3];
+
+var nlWest = [
+    ["Los Angeles", null, null, null],
+    ["San Francisco", null, null, null],
+    ["San Diego", null, null, null],
+    ["Arizona", null, null, null],
+    ["Colorado", null, null, null]
+];
+
+//Fetch NL West data
+//Dodgers data
+var lanRequest = new XMLHttpRequest();
+lanRequest.open("GET", "http://gd2.mlb.com/components/team/stats/119-stats.xml", false);
+lanRequest.send()
+var lanData = lanRequest.responseXML;
+nlWest[0][1] = parseInt(lanData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"));
+nlWest[0][2] = parseInt(lanData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"));
+nlWest[0][3] = parseInt(lanData.firstChild.nextSibling.firstChild.getAttribute("R")) - parseInt(lanData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"));
+//Giants data
+var stlRequest = new XMLHttpRequest();
+sfRequest.open("GET", "http://gd2.mlb.com/components/team/stats/137-stats.xml", false);
+sfRequest.send()
+var sfData = sfRequest.responseXML;
+nlWest[1][1] = parseInt(sfData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlWest[1][2] = parseInt(sfData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlWest[1][3] = parseInt(sfData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(sfData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Padres data
+var sdRequest = new XMLHttpRequest();
+sdRequest.open("GET", "http://gd2.mlb.com/components/team/stats/135-stats.xml", false);
+sdRequest.send()
+var sdData = sdRequest.responseXML;
+nlWest[2][1] = parseInt(sdData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlWest[2][2] = parseInt(sdData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlWest[2][3] = parseInt(sdData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(sdData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Diamondbacks data
+var ariRequest = new XMLHttpRequest();
+ariRequest.open("GET", "http://gd2.mlb.com/components/team/stats/109-stats.xml", false);
+ariRequest.send()
+var ariData = ariRequest.responseXML;
+nlWest[3][1] = parseInt(ariData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlWest[3][2] = parseInt(ariData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlWest[3][3] = parseInt(ariData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(ariData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+//Rockies data
+var colRequest = new XMLHttpRequest();
+colRequest.open("GET", "http://gd2.mlb.com/components/team/stats/115-stats.xml", false);
+colRequest.send()
+var colData = colRequest.responseXML;
+nlWest[4][1] = parseInt(colData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("W"), 10);
+nlWest[4][2] = parseInt(colData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"), 10);
+nlWest[4][3] = parseInt(colData.firstChild.nextSibling.firstChild.getAttribute("R"), 10) - parseInt(colData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"), 10);
+
+//Sort NL West teams by record
+nlWest.sort(function (a, b) {
+    return b[1] / b[2] - a[1] / a[2];
+});
+
+//Put NL West data on page
+document.getElementById("nlWestFirstName").innerText = nlWest[0][0];
+document.getElementById("nlWestFirstWs").innerText = nlWest[0][1];
+document.getElementById("nlWestFirstLs").innerText = nlWest[0][2];
+document.getElementById("nlWestFirstPer").innerText = (nlWest[0][1]/(nlWest[0][1]+nlWest[0][2])).toFixed(3) == 1 ? (nlWest[0][1]/(nlWest[0][1]+nlWest[0][2])).toFixed(3) : (nlWest[0][1]/(nlWest[0][1]+nlWest[0][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlWestFirstGB").innerText = ((nlWest[1][1] - nlWest[0][1]) + (nlWest[0][2] - nlWest[1][2]))/2 > 0 ? (((nlWest[1][1] - nlWest[0][1]) + (nlWest[0][2] - nlWest[1][2]))/2).toFixed(1) : "-";
+document.getElementById("nlWestFirstDiff").innerText = nlWest[0][3];
+
+document.getElementById("nlWestSecondName").innerText = nlWest[1][0];
+document.getElementById("nlWestSecondWs").innerText = nlWest[1][1];
+document.getElementById("nlWestSecondLs").innerText = nlWest[1][2];
+document.getElementById("nlWestSecondPer").innerText = (nlWest[1][1]/(nlWest[1][1]+nlWest[1][2])).toFixed(3) == 1 ? (nlWest[1][1]/(nlWest[1][1]+nlWest[1][2])).toFixed(3) : (nlWest[1][1]/(nlWest[1][1]+nlWest[1][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlWestSecondGB").innerText = ((nlWest[0][1] - nlWest[1][1]) + (nlWest[1][2] - nlWest[0][2]))/2 > 0 ? (((nlWest[0][1] - nlWest[1][1]) + (nlWest[1][2] - nlWest[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlWestSecondDiff").innerText = nlWest[1][3];
+
+document.getElementById("nlWestThirdName").innerText = nlWest[2][0];
+document.getElementById("nlWestThirdWs").innerText = nlWest[2][1];
+document.getElementById("nlWestThirdLs").innerText = nlWest[2][2];
+document.getElementById("nlWestThirdPer").innerText = (nlWest[2][1]/(nlWest[2][1]+nlWest[2][2])).toFixed(3) == 1 ? (nlWest[2][1]/(nlWest[2][1]+nlWest[2][2])).toFixed(3) : (nlWest[2][1]/(nlWest[2][1]+nlWest[2][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlWestThirdGB").innerText = ((nlWest[0][1] - nlWest[2][1]) + (nlWest[2][2] - nlWest[0][2]))/2 > 0 ? (((nlWest[0][1] - nlWest[2][1]) + (nlWest[2][2] - nlWest[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlWestThirdDiff").innerText = nlWest[2][3];
+
+document.getElementById("nlWestFourthName").innerText = nlWest[3][0];
+document.getElementById("nlWestFourthWs").innerText = nlWest[3][1];
+document.getElementById("nlWestFourthLs").innerText = nlWest[3][2];
+document.getElementById("nlWestFourthPer").innerText = (nlWest[3][1]/(nlWest[3][1]+nlWest[3][2])).toFixed(3) == 1 ? (nlWest[3][1]/(nlWest[3][1]+nlWest[3][2])).toFixed(3) : (nlWest[3][1]/(nlWest[3][1]+nlWest[3][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlWestFourthGB").innerText = ((nlWest[0][1] - nlWest[3][1]) + (nlWest[3][2] - nlWest[0][2]))/2 > 0 ? (((nlWest[0][1] - nlWest[3][1]) + (nlWest[3][2] - nlWest[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlWestFourthDiff").innerText = nlWest[3][3];
+
+document.getElementById("nlWestFifthName").innerText = nlWest[4][0];
+document.getElementById("nlWestFifthWs").innerText = nlWest[4][1];
+document.getElementById("nlWestFifthLs").innerText = nlWest[4][2];
+document.getElementById("nlWestFifthPer").innerText = (nlWest[4][1]/(nlWest[4][1]+nlWest[4][2])).toFixed(3) == 1 ? (nlWest[4][1]/(nlWest[4][1]+nlWest[4][2])).toFixed(3) : (nlWest[4][1]/(nlWest[4][1]+nlWest[4][2])).toFixed(3).toString().substr(1);
+document.getElementById("nlWestFifthGB").innerText = ((nlWest[0][1] - nlWest[4][1]) + (nlWest[4][2] - nlWest[0][2]))/2 > 0 ? (((nlWest[0][1] - nlWest[4][1]) + (nlWest[4][2] - nlWest[0][2]))/2).toFixed(1) : "-";
+document.getElementById("nlWestFifthDiff").innerText = nlWest[4][3];

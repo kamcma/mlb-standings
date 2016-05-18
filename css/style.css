@@ -11,6 +11,7 @@ th {
 }
 td {
     text-align: right;
+    font-weight: normal;
 }
 .teamName {
     text-align: left;

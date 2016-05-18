@@ -504,7 +504,7 @@ nlWest[0][1] = parseInt(lanData.firstChild.nextSibling.firstChild.nextSibling.ge
 nlWest[0][2] = parseInt(lanData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("L"));
 nlWest[0][3] = parseInt(lanData.firstChild.nextSibling.firstChild.getAttribute("R")) - parseInt(lanData.firstChild.nextSibling.firstChild.nextSibling.getAttribute("R"));
 //Giants data
-var stlRequest = new XMLHttpRequest();
+var sfRequest = new XMLHttpRequest();
 sfRequest.open("GET", "http://gd2.mlb.com/components/team/stats/137-stats.xml", false);
 sfRequest.send()
 var sfData = sfRequest.responseXML;

@@ -99,7 +99,7 @@ $(document).ready(function (){
     }
 
     //separating (generating xhrs and parsing data) and (sorting arrays and placing data in dom) for future asynchronization of xhrs
-
+     
     for (var i = 0; i < teamsArray.length; i++) {
         
         console.log("Sorting " + teamsArray[i][0]);

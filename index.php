@@ -1,4 +1,63 @@
-﻿<!DOCTYPE html>
+<?php
+$league = array(
+    array(
+        array("Baltimore", "110", null, null, null, null, false),
+        array("Boston", "111", null, null, null, null, false),
+        array("New York", "147", null, null, null, null, false),
+        array("Tampa Bay", "139", null, null, null, null, false),
+        array("Toronto", "141", null, null, null, null, false)
+    ),
+    array(
+        array("Chicago", "145", null, null, null, null, false),
+        array("Cleveland", "114", null, null, null, null, false),
+        array("Detroit", "116", null, null, null, null, false),
+        array("Kansas City", "118", null, null, null, null, false),
+        array("Minnesota", "142", null, null, null, null, false)
+    ),
+    array(
+        array("Houston", "117", null, null, null, null, false),
+        array("Los Angeles", "108", null, null, null, null, false),
+        array("Oakland", "133", null, null, null, null, false),
+        array("Seattle", "136", null, null, null, null, false),
+        array("Texas", "140", null, null, null, null, false)
+    ),
+    array(
+        array("Atlanta", "144", null, null, null, null, false),
+        array("Miami", "146", null, null, null, null, false),
+        array("New York", "121", null, null, null, null, false),
+        array("Philadelphia", "143", null, null, null, null, false),
+        array("Washington", "120", null, null, null, null, false)
+    ),
+    array(
+        array("Chicago", "112", null, null, null, null, false),
+        array("Cincinnati", "113", null, null, null, null, false),
+        array("Milkwaukee", "158", null, null, null, null, false),
+        array("Pittsburgh", "134", null, null, null, null, false),
+        array("Saint Louis", "138", null, null, null, null, false)
+    ),
+    array(
+        array("Arizona", "109", null, null, null, null, false),
+        array("Colorado", "115", null, null, null, null, false),
+        array("Los Angeles", "119", null, null, null, null, false),
+        array("San Diego", "135", null, null, null, null, false),
+        array("San Francisco", "137", null, null, null, null, false)
+    )
+);
+
+foreach ($league as $division) {
+    foreach($division as $team) {
+        $xml = simplexml_load_file("http://gd2.mlb.com/components/team/stats/" . $team[1] . "-stats.xml");
+        $team[2] = $xml->children()[1]['W'];
+        $team[3] = $xml->children()[1]['L'];
+        $team[4] = $xml->children()[0]['R'];
+        $team[5] = $xml->children()[1]['R'];
+    }
+}
+
+print_r($league);
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -390,11 +449,10 @@
                 </div>
             </div>
         </div>
-        <h6>Data courtesy MLB. Copyright © 2016 Kyle McMahon.</h6>
+        <h6>Data courtesy MLB. Copyright © <?php echo date("Y");?> Kyle McMahon.</h6>
     </div>
 
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>   
 </body>
 </html>

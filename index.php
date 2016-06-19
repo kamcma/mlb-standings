@@ -1,71 +1,73 @@
 <?php
-$league = array(
+$baseball = array(
     array(
-        array("Baltimore", "110", null, null, null, null, false),
-        array("Boston", "111", null, null, null, null, false),
-        array("New York", "147", null, null, null, null, false),
-        array("Tampa Bay", "139", null, null, null, null, false),
-        array("Toronto", "141", null, null, null, null, false)
+    	array(
+			array("Baltimore", 110, 0, 0, 0, 0),
+			array("Boston", 111, 0, 0, 0, 0),
+			array("New York", 147, 0, 0, 0, 0),
+			array("Tampa Bay", 139, 0, 0, 0, 0),
+			array("Toronto", 141, 0, 0, 0, 0)
+    	),
+    	array(
+			array("Chicago", 145, 0, 0, 0, 0),
+			array("Cleveland", 114, 0, 0, 0, 0),
+			array("Detroit", 116, 0, 0, 0, 0),
+			array("Kansas City", 118, 0, 0, 0, 0),
+			array("Minnesota", 142, 0, 0, 0, 0)
+		),
+		array(
+			array("Houston", 117, 0, 0, 0, 0),
+			array("Los Angeles", 108, 0, 0, 0, 0),
+			array("Oakland", 133, 0, 0, 0, 0),
+			array("Seattle", 136, 0, 0, 0, 0),
+			array("Texas", 140, 0, 0, 0, 0)
+		)
     ),
     array(
-        array("Chicago", "145", null, null, null, null, false),
-        array("Cleveland", "114", null, null, null, null, false),
-        array("Detroit", "116", null, null, null, null, false),
-        array("Kansas City", "118", null, null, null, null, false),
-        array("Minnesota", "142", null, null, null, null, false)
-    ),
-    array(
-        array("Houston", "117", null, null, null, null, false),
-        array("Los Angeles", "108", null, null, null, null, false),
-        array("Oakland", "133", null, null, null, null, false),
-        array("Seattle", "136", null, null, null, null, false),
-        array("Texas", "140", null, null, null, null, false)
-    ),
-    array(
-        array("Atlanta", "144", null, null, null, null, false),
-        array("Miami", "146", null, null, null, null, false),
-        array("New York", "121", null, null, null, null, false),
-        array("Philadelphia", "143", null, null, null, null, false),
-        array("Washington", "120", null, null, null, null, false)
-    ),
-    array(
-        array("Chicago", "112", null, null, null, null, false),
-        array("Cincinnati", "113", null, null, null, null, false),
-        array("Milkwaukee", "158", null, null, null, null, false),
-        array("Pittsburgh", "134", null, null, null, null, false),
-        array("Saint Louis", "138", null, null, null, null, false)
-    ),
-    array(
-        array("Arizona", "109", null, null, null, null, false),
-        array("Colorado", "115", null, null, null, null, false),
-        array("Los Angeles", "119", null, null, null, null, false),
-        array("San Diego", "135", null, null, null, null, false),
-        array("San Francisco", "137", null, null, null, null, false)
+		array(
+			array("Atlanta", 144, 0, 0, 0, 0),
+			array("Miami", 146, 0, 0, 0, 0),
+			array("New York", 121, 0, 0, 0, 0),
+			array("Philadelphia", 143, 0, 0, 0, 0),
+			array("Washington", 120, 0, 0, 0, 0)
+		),
+		array(
+			array("Chicago", 112, 0, 0, 0, 0),
+			array("Cincinnati", 113, 0, 0, 0, 0),
+			array("Milkwaukee", 158, 0, 0, 0, 0),
+			array("Pittsburgh", 134, 0, 0, 0, 0),
+			array("Saint Louis", 138, 0, 0, 0, 0)
+		),
+		array(
+			array("Arizona", 109, 0, 0, 0, 0),
+			array("Colorado", 115, 0, 0, 0, 0),
+			array("Los Angeles", 119, 0, 0, 0, 0),
+			array("San Diego", 135, 0, 0, 0, 0),
+			array("San Francisco", 137, 0, 0, 0, 0)
+		)
     )
 );
 
-foreach ($league as $division) {
-    foreach($division as $team) {
-        $xml = simplexml_load_file("http://gd2.mlb.com/components/team/stats/" . $team[1] . "-stats.xml");
-        $team[2] = $xml->children()[1]['W'];
-        $team[3] = $xml->children()[1]['L'];
-        $team[4] = $xml->children()[0]['R'];
-        $team[5] = $xml->children()[1]['R'];
-    }
+
+foreach ($baseball as &$league) {
+	foreach($league as &$division) {
+		foreach($division as &$team) {
+			$xml = simplexml_load_file("http://gd2.mlb.com/components/team/stats/" . $team[1] . "-stats.xml");
+			//$team[2] = intval($xml->children()[1]['W']);
+			//$team[3] = intval($xml->children()[1]['L']);
+			$team[4] = intval($xml->children()[0]['R']);
+			$team[5] = intval($xml->children()[1]['R']);
+		}
+	}
 }
-
-print_r($league);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-
     <title>MLB Standings</title>
     <meta name="description" content="A beautifully simple MLB standings pages">
 </head>
@@ -95,44 +97,44 @@ print_r($league);
                                 <th>Run Diff</th>
                             </tr>
                             <tr>
-                                <td id="alEastFirstName" class="teamName">&nbsp;</td>
-                                <td id="alEastFirstWs">&nbsp;</td>
-                                <td id="alEastFirstLs">&nbsp;</td>
-                                <td id="alEastFirstPer">&nbsp;</td>
-                                <td id="alEastFirstGB">&nbsp;</td>
-                                <td id="alEastFirstDiff">&nbsp;</td>
+                                <td class="teamName"><?php echo $baseball[0][0][0][0];?></td>
+                                <td><?php echo $baseball[0][0][0][2];?></td>
+                                <td><?php echo $baseball[0][0][0][3];?></td>
+                                <td><?php echo number_format($baseball[0][0][0][2]/($baseball[0][0][0][2]+$baseball[0][0][0][3]),3);?></td>
+                                <td>&nbsp;</td>
+                                <td><?php echo $baseball[0][0][0][4] - $baseball[0][0][0][5];?></td>
                             </tr>
                             <tr>
-                                <td id="alEastSecondName" class="teamName">&nbsp;</td>
-                                <td id="alEastSecondWs">&nbsp;</td>
-                                <td id="alEastSecondLs">&nbsp;</td>
-                                <td id="alEastSecondPer">&nbsp;</td>
-                                <td id="alEastSecondGB">&nbsp;</td>
-                                <td id="alEastSecondDiff">&nbsp;</td>
+                                <td class="teamName"><?php echo $baseball[0][0][1][0];?></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td id="alEastThirdName" class="teamName">&nbsp;</td>
-                                <td id="alEastThirdWs">&nbsp;</td>
-                                <td id="alEastThirdLs">&nbsp;</td>
-                                <td id="alEastThirdPer">&nbsp;</td>
-                                <td id="alEastThirdGB">&nbsp;</td>
-                                <td id="alEastThirdDiff">&nbsp;</td>
+                                <td class="teamName"><?php echo $baseball[0][0][2][0];?></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td id="alEastFourthName" class="teamName">&nbsp;</td>
-                                <td id="alEastFourthWs">&nbsp;</td>
-                                <td id="alEastFourthLs">&nbsp;</td>
-                                <td id="alEastFourthPer">&nbsp;</td>
-                                <td id="alEastFourthGB">&nbsp;</td>
-                                <td id="alEastFourthDiff">&nbsp;</td>
+                                <td class="teamName"><?php echo $baseball[0][0][3][0];?></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td id="alEastFifthName" class="teamName">&nbsp;</td>
-                                <td id="alEastFifthWs">&nbsp;</td>
-                                <td id="alEastFifthLs">&nbsp;</td>
-                                <td id="alEastFifthPer">&nbsp;</td>
-                                <td id="alEastFifthGB">&nbsp;</td>
-                                <td id="alEastFifthDiff">&nbsp;</td>
+                                <td class="teamName"><?php echo $baseball[0][0][4][0];?></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
                             </tr>                               
                         </table>
                     </div>

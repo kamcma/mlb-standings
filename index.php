@@ -65,10 +65,10 @@ foreach ($baseball as &$league) {
 		}
 		
 		// division data loaded, perform sort
-		usort($division, function($a, $b) {
+		/*usort($division, function($a, $b) {
 			//sorting alphabetically
 			return $a[0] < $b[0] ? -1 : 1;
-		});
+		});*/
 	}
 }
 ?>

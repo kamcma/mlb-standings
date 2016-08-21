@@ -134,6 +134,7 @@ foreach ($baseball as &$league) {
 							$runsScored = $baseball[$i][$j][$k][4];
 							$runsAllowed = $baseball[$i][$j][$k][5];
 							$winPercentage = $wins / ($wins + $losses);
+							$gamesBack = (($baseball[$i][$j][0][2]-$wins)+($losses-$baseball[$i][$j][0][3]))/2;
 							echo '<tr>';
 								echo '<td class="teamName">';
 									echo $teamName;
@@ -148,7 +149,7 @@ foreach ($baseball as &$league) {
 									echo number_format($winPercentage, 3);
 								echo '</td>';
 								echo '<td>';
-									//echo $baseball[$i][$j][$k][2];
+									echo $gamesBack == 0 ? '' : number_format($gamesBack, 1);
 								echo '</td>';
 								echo '<td>';
 									echo $runsScored - $runsAllowed;

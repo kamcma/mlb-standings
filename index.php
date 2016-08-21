@@ -65,10 +65,9 @@ foreach ($baseball as &$league) {
 		}
 		
 		// division data loaded, perform sort
-		/*usort($division, function($a, $b) {
-			//sorting alphabetically
-			return $a[0] < $b[0] ? -1 : 1;
-		});*/
+		usort($division, function($a, $b) {
+			return $a[2]/$a[3] > $b[2]/$b[3] ? -1 : 1;
+		});
 	}
 }
 ?>
@@ -129,7 +128,7 @@ foreach ($baseball as &$league) {
 							echo '</tr>';
 							// loop over each team
 						for ($k = 0; $k < count($baseball[$i][$j]); $k++) {
-							$team = $baseball[$i][$j][$k][0];
+							$teamName = $baseball[$i][$j][$k][0];
 							$wins = $baseball[$i][$j][$k][2];
 							$losses = $baseball[$i][$j][$k][3];
 							$runsScored = $baseball[$i][$j][$k][4];
@@ -137,7 +136,7 @@ foreach ($baseball as &$league) {
 							$winPercentage = $wins / ($wins + $losses);
 							echo '<tr>';
 								echo '<td class="teamName">';
-									echo $team;
+									echo $teamName;
 								echo '</td>';
 								echo '<td>';
 									echo $wins;

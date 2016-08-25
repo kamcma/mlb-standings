@@ -146,7 +146,7 @@ foreach ($baseball as &$league) {
 									echo $losses;
 								echo '</td>';
 								echo '<td>';
-									echo number_format($winPercentage, 3);
+									echo ltrim(strval(number_format($winPercentage, 3)), "0");
 								echo '</td>';
 								echo '<td>';
 									echo $gamesBack == 0 ? '' : number_format($gamesBack, 1);

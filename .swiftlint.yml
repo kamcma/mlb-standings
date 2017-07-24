@@ -1,0 +1,5 @@
+excluded:
+  - Packages
+  - .build
+disabled_rules:
+  

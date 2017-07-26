@@ -1,3 +1,6 @@
 {
-    "commands": ["fetch"]
+    "commands": [
+        "fetch",
+        "prepare"
+    ]
 }

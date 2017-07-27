@@ -83,6 +83,5 @@ extension Row: JSONInitializable {
         l = try json.get("l")
         runs = try json.get("runs")
         oppRuns = try json.get("opp_runs")
-
     }
 }

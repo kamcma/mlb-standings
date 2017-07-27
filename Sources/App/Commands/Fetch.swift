@@ -44,8 +44,15 @@ final class Fetch: Command {
 
         console.print(mlbResponse.standingsScheduleDate.copyright)
 
-        for team in mlbResponse.standingsScheduleDate.standingsAllDateRptr.standingsAllDate[0].queryResults.row {
-            console.print("\(team.teamFull)\t\t\(team.w)-\(team.l)")
+        for row in mlbResponse.standingsScheduleDate.standingsAllDateRptr.standingsAllDate[0].queryResults.row {
+            console.print("\(row.teamFull)")
+            if let team = try Team.find(row.teamId) {
+                team.wins = row.w
+                team.losses = row.l
+                team.runs = row.runs
+                team.oppRuns = row.oppRuns
+                try team.save()
+            }
         }
     }
 }

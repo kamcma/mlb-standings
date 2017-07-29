@@ -30,6 +30,24 @@ struct Migration0: Preparation {
         try Team(team: .oakland, league: .american, division: .alWest).save()
         try Team(team: .seattle, league: .american, division: .alWest).save()
         try Team(team: .texas, league: .american, division: .alWest).save()
+
+        try Team(team: .atlanta, league: .national, division: .nlEast).save()
+        try Team(team: .miami, league: .national, division: .nlEast).save()
+        try Team(team: .nyMets, league: .national, division: .nlEast).save()
+        try Team(team: .philadelphia, league: .national, division: .nlEast).save()
+        try Team(team: .washington, league: .national, division: .nlEast).save()
+
+        try Team(team: .chiCubs, league: .national, division: .nlCentral).save()
+        try Team(team: .cincinnati, league: .national, division: .nlCentral).save()
+        try Team(team: .milwaukee, league: .national, division: .nlCentral).save()
+        try Team(team: .pittsburgh, league: .national, division: .nlCentral).save()
+        try Team(team: .stLouis, league: .national, division: .nlCentral).save()
+
+        try Team(team: .arizona, league: .national, division: .nlWest).save()
+        try Team(team: .colorado, league: .national, division: .nlWest).save()
+        try Team(team: .laDodgers, league: .national, division: .nlWest).save()
+        try Team(team: .sanDiego, league: .national, division: .nlWest).save()
+        try Team(team: .sanFrancisco, league: .national, division: .nlWest).save()
     }
 
     static func revert(_ database: Database) throws {

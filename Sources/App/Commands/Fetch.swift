@@ -21,37 +21,49 @@ final class Fetch: Command {
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        let formattedDateParameter = formatter.string(from: now)
+        let yearFormatter = DateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        let dateParameter = formatter.string(from: now)
+        let yearParameter = yearFormatter.string(from: now)
 
-        let res = try client.get("http://mlb.mlb.com/lookup/json/named.standings_schedule_date.bam", query: [
-            "season": "2017",
-            "schedule_game_date.game_date": "'\(formattedDateParameter)'",
-            "sit_code": "'h0'",
-            "league_id": "103",
-            //"league_id": "104",
-            "all_star_sw": "'N'",
-            "version": "2",
-        ])
+        for league in ["103", "104"] {
+            console.print("updating league \(league) ...")
+            var res: Response
+            var tries = 0
 
-        guard res.status == .ok else {
-            console.print("\(res.status.statusCode)")
-            return
-        }
+            repeat {
+                tries += 1
+                console.print("attempt \(tries) ...")
+                res = try client.get("http://mlb.mlb.com/lookup/json/named.standings_schedule_date.bam", query: [
+                    "season": "\(yearParameter)",
+                    "schedule_game_date.game_date": "'\(dateParameter)'",
+                    "sit_code": "'h0'",
+                    "league_id": league,
+                    "all_star_sw": "'N'",
+                    "version": "2",
+                ])
+                console.print("\(res.status.statusCode)")
+                sleep(1)
+            } while res.status == .accepted && tries < 5
 
-        let json = try JSON(bytes: res.body.bytes!)
+            guard res.status == .ok else {
+                console.print("unable to update league \(league)")
+                continue
+            }
 
-        let mlbResponse = try MLBResponse(json: json)
+            let json = try JSON(bytes: res.body.bytes!)
+            let mlbResponse = try MLBResponse(json: json)
 
-        console.print(mlbResponse.standingsScheduleDate.copyright)
-
-        for row in mlbResponse.standingsScheduleDate.standingsAllDateRptr.standingsAllDate[0].queryResults.row {
-            console.print("\(row.teamFull)")
-            if let team = try Team.find(row.teamId) {
-                team.wins = row.w
-                team.losses = row.l
-                team.runs = row.runs
-                team.oppRuns = row.oppRuns
-                try team.save()
+            for standingsAllDate in mlbResponse.standingsScheduleDate.standingsAllDateRptr.standingsAllDate {
+                for row in standingsAllDate.queryResults.row {
+                    if let team = try Team.find(row.teamId) {
+                        team.wins = row.w
+                        team.losses = row.l
+                        team.runs = row.runs
+                        team.oppRuns = row.oppRuns
+                        try team.save()
+                    }
+                }
             }
         }
     }

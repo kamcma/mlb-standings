@@ -39,3 +39,13 @@ final class Team: Model, Timestampable {
         return row
     }
 }
+
+extension Team: NodeRepresentable {
+    func makeNode(in context: Context?) throws -> Node {
+        var node = Node(context)
+        try node.set("id", id?.wrapped)
+        try node.set("wins", wins)
+        try node.set("losses", losses)
+        return node
+    }
+}

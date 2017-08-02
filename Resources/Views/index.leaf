@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MLB Standings</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Ws</th>
+            <th>Ls</th>
+        </tr>
+        #loop(teams, "team") {
+            <tr>
+                <td> #(team.id) </td>
+                <td> #(team.wins) </td>
+                <td> #(team.losses) </td>
+            </tr>
+        }
+    </table>
+</body>
+
+</html>

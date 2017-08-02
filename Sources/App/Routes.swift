@@ -3,6 +3,6 @@ import HTTP
 
 extension Droplet {
     func setupRoutes(drop: Droplet) throws {
-        get("team", Team.parameter, handler: Controller().index)
+        get("team", Team.parameter, handler: Controller(view).index)
     }
 }

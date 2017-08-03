@@ -21,10 +21,12 @@ final class Fetch: Command {
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        let yearFormatter = DateFormatter()
-        yearFormatter.dateFormat = "yyyy"
+        formatter.timeZone = TimeZone(identifier: "America/New_York")
         let dateParameter = formatter.string(from: now)
-        let yearParameter = yearFormatter.string(from: now)
+        formatter.dateFormat = "yyyy"
+        let yearParameter = formatter.string(from: now)
+        console.print(dateParameter)
+        console.print(yearParameter)
 
         for league in ["103", "104"] {
             console.print("updating league \(league) ...")

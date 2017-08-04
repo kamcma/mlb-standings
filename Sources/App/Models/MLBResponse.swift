@@ -28,9 +28,9 @@ struct StandingsAllDateRptr {
 }
 
 extension StandingsAllDateRptr: JSONInitializable {
-    init (json: JSON) throws {
+    init(json: JSON) throws {
         let jsonArray: [JSON] = try json.get("standings_all_date")
-        standingsAllDate = try jsonArray.map { try StandingsAllDate(json: $0) }
+        standingsAllDate = try jsonArray.map(StandingsAllDate.init)
     }
 }
 
@@ -56,7 +56,7 @@ extension QueryResults: JSONInitializable {
     init(json: JSON) throws {
         //created = json.get("created")
         let jsonArray: [JSON] = try json.get("row")
-        row = try jsonArray.map { try Row(json: $0) }
+        row = try jsonArray.map(Row.init)
     }
 }
 

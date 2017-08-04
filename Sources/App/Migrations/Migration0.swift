@@ -3,14 +3,14 @@ import MLB
 
 struct Migration0: Preparation {
     static func prepare(_ database: Database) throws {
-        try database.create(Team.self) { t in
-            t.id()
-            t.int("league_id")
-            t.int("division_id")
-            t.int("wins", optional: true)
-            t.int("losses", optional: true)
-            t.int("runs", optional: true)
-            t.int("opp_runs", optional: true)
+        try database.create(Team.self) { team in
+            team.id()
+            team.int("league_id")
+            team.int("division_id")
+            team.int("wins", optional: true)
+            team.int("losses", optional: true)
+            team.int("runs", optional: true)
+            team.int("opp_runs", optional: true)
         }
 
         try Team(team: .baltimore, league: .american, division: .alEast).save()

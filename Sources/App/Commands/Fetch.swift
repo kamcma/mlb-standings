@@ -40,7 +40,7 @@ final class Fetch: Command {
                     "sit_code": "'h0'",
                     "league_id": league,
                     "all_star_sw": "'N'",
-                    "version": "2",
+                    "version": "2"
                 ])
                 console.print("\(res.status.statusCode)")
                 if res.status != .ok { sleep(5) }

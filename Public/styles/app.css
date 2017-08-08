@@ -12,6 +12,12 @@ td {
     text-align: right;
     font-weight: normal;
 }
-.teamName {
-    text-align: left;
+
+table, th, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%
 }

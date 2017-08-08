@@ -7,20 +7,24 @@
 </head>
 
 <body>
+    <h2>American League</h2>
+    <h3>East</h3>
     <table>
         <tr>
             <th>ID</th>
-            <th>Ws</th>
-            <th>Ls</th>
+            <th>Wins</th>
+            <th>Losses</th>
         </tr>
-        #loop(teams, "team") {
+    #loop(alEast, "team") {
         <tr>
-            <td> #(team.id) </td>
-            <td> #(team.wins) </td>
-            <td> #(team.losses) </td>
+            <td>#(team.id)</td>
+            <td>#(team.wins)</td>
+            <td>#(team.losses)</td>
         </tr>
-        }
+    }
     </table>
+    <h3>Central</h3>
+    <h3>West</h3>
 </body>
 
 </html>

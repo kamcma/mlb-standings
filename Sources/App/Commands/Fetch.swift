@@ -25,8 +25,6 @@ final class Fetch: Command {
         let dateParameter = formatter.string(from: now)
         formatter.dateFormat = "yyyy"
         let yearParameter = formatter.string(from: now)
-        console.print(dateParameter)
-        console.print(yearParameter)
 
         for league in ["103", "104"] {
             console.print("updating league \(league) ...")
@@ -45,8 +43,8 @@ final class Fetch: Command {
                     "version": "2",
                 ])
                 console.print("\(res.status.statusCode)")
-                sleep(1)
-            } while res.status == .accepted && tries < 5
+                if res.status != .ok { sleep(5) }
+            } while res.status != .ok && tries < 5
 
             guard res.status == .ok else {
                 console.print("unable to update league \(league)")

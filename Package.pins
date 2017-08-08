@@ -5,7 +5,7 @@
       "package": "BCrypt",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/bcrypt.git",
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "package": "Bits",
@@ -23,7 +23,7 @@
       "package": "CTLS",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/ctls.git",
-      "version": "1.0.0"
+      "version": "1.1.1"
     },
     {
       "package": "Console",
@@ -35,13 +35,13 @@
       "package": "Core",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/core.git",
-      "version": "2.1.1"
+      "version": "2.1.2"
     },
     {
       "package": "Crypto",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/crypto.git",
-      "version": "2.0.0"
+      "version": "2.1.0"
     },
     {
       "package": "Debugging",
@@ -53,7 +53,7 @@
       "package": "Engine",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/engine.git",
-      "version": "2.1.3"
+      "version": "2.2.0"
     },
     {
       "package": "Fluent",
@@ -125,7 +125,7 @@
       "package": "Random",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/random.git",
-      "version": "1.1.1"
+      "version": "1.2.0"
     },
     {
       "package": "Routing",
@@ -137,19 +137,19 @@
       "package": "SQLite",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/sqlite.git",
-      "version": "2.0.2"
+      "version": "2.1.0"
     },
     {
       "package": "Sockets",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/sockets.git",
-      "version": "2.0.1"
+      "version": "2.1.0"
     },
     {
       "package": "TLS",
       "reason": null,
       "repositoryURL": "https://github.com/vapor/tls.git",
-      "version": "2.0.4"
+      "version": "2.1.0"
     },
     {
       "package": "Vapor",

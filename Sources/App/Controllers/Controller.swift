@@ -9,11 +9,12 @@ final class Controller {
     }
 
     func index(req: Request) throws -> ResponseRepresentable {
-        var baseball = [String: [Team]]()
+        var baseball = [String: [Node]]()
 
         for division in [MLBDivision.alEast, .alCentral, .alWest, .nlEast, .nlCentral, .nlWest] {
             baseball[division.description] = try Team.makeQuery()
                 .filter("division_id", division.rawValue).sort("losses", .ascending).all()
+                .map{ try $0.makeNode(in: MLBStandingsViewContext()) }
         }
 
         return try view.make("index", baseball)

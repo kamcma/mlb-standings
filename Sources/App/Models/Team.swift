@@ -55,7 +55,7 @@ extension Team: NodeRepresentable {
         }
         try node.set("wins", wins ?? 0)
         try node.set("losses", losses ?? 0)
-        try node.set("runn_diff", (runs ?? 0) - (oppRuns ?? 0))
+        try node.set("run_diff", (runs ?? 0) - (oppRuns ?? 0))
         return node
     }
 }

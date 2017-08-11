@@ -43,9 +43,95 @@ final class Team: Model, Timestampable {
 extension Team: NodeRepresentable {
     func makeNode(in context: Context?) throws -> Node {
         var node = Node(context)
-        try node.set("id", id?.wrapped)
-        try node.set("wins", wins)
-        try node.set("losses", losses)
+        try node.set("id", id?.wrapped.int)
+        if context is MLBStandingsViewContext {
+            if let id = id?.wrapped.int {
+                try node.set("name", MLBTeam(rawValue: id)?.description)
+            }
+            if let wins = wins, let losses = losses {
+                let percentage = Float(wins) / Float(wins + losses)
+                try node.set("perc", String(format: "%.3f", percentage))
+            }
+        }
+        try node.set("wins", wins ?? 0)
+        try node.set("losses", losses ?? 0)
+        try node.set("runn_diff", (runs ?? 0) - (oppRuns ?? 0))
         return node
+    }
+}
+
+import Node
+
+final class MLBStandingsViewContext: Context { }
+
+extension MLBTeam: CustomStringConvertible {
+    public var description: String {
+        switch  self {
+        case .baltimore:
+            return "Baltimore"
+        case .boston:
+            return "Boston"
+        case .nyYankees:
+            return "New York"
+        case .tampaBay:
+            return "Tampa Bay"
+        case .toronto:
+            return "Toronto"
+
+        case .chiWhiteSox:
+            return "Chicago"
+        case .cleveland:
+            return "Cleveland"
+        case .detroit:
+            return "Detroit"
+        case .kansasCity:
+            return "Kansas City"
+        case .minnesota:
+            return "Minnesota"
+
+        case .houston:
+            return "Houston"
+        case .laAngels:
+            return "Los Angeles"
+        case .oakland:
+            return "Oakland"
+        case .seattle:
+            return "Seattle"
+        case .texas:
+            return "Texas"
+
+        case .atlanta:
+            return "Atlanta"
+        case .miami:
+            return "Miami"
+        case .nyMets:
+            return "New York"
+        case .philadelphia:
+            return "Philadelphia"
+        case .washington:
+            return "Washington"
+
+        case .chiCubs:
+            return "Chicago"
+        case .cincinnati:
+            return "Cincinnati"
+        case .milwaukee:
+            return "Milwaukee"
+        case .pittsburgh:
+            return "Pittsburgh"
+        case .stLouis:
+            return "Saint Louis"
+
+        case .arizona:
+            return "Arizona"
+        case .colorado:
+            return "Colorado"
+        case .laDodgers:
+            return "Los Angeles"
+        case .sanDiego:
+            return "San Diego"
+        case .sanFrancisco:
+            return "San Francisco"
+        }
     }
 }

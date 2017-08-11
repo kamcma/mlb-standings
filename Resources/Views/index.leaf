@@ -11,15 +11,19 @@
     <h3>East</h3>
     <table>
         <tr>
-            <th>ID</th>
+            <th>Team</th>
             <th>Wins</th>
             <th>Losses</th>
+            <th>Percentage</th>
+            <th>Run Diff</th>
         </tr>
     #loop(alEast, "team") {
         <tr>
-            <td>#(team.id)</td>
+            <td>#(team.name)</td>
             <td>#(team.wins)</td>
             <td>#(team.losses)</td>
+            <td>#(team.perc)</td>
+            <td>#(team.run_diff)</td>
         </tr>
     }
     </table>

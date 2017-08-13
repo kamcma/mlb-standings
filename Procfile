@@ -1,1 +1,1 @@
-web: .build/release/Run --env=heroku --workdir=./
+web: .build/release/Run --env=heroku

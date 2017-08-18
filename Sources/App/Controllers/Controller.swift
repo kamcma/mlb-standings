@@ -14,7 +14,7 @@ final class Controller {
         for division in [MLBDivision.alEast, .alCentral, .alWest, .nlEast, .nlCentral, .nlWest] {
             baseball[division.description] = try Team.makeQuery()
                 .filter("division_id", division.rawValue).sort("losses", .ascending).all()
-                .map{ try $0.makeNode(in: MLBStandingsViewContext()) }
+                .map { try $0.makeNode(in: MLBStandingsViewContext()) }
         }
 
         return try view.make("index", baseball)

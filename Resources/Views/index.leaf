@@ -1,34 +1,91 @@
-<!DOCTYPE html>
-<html>
+#extend("base")
 
-<head>
-    <title>MLB Standings</title>
-    <link rel="stylesheet" href="/styles/app.css">
-</head>
-
-<body>
-    <h2>American League</h2>
-    <h3>East</h3>
-    <table>
-        <tr>
-            <th>Team</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Percentage</th>
-            <th>Run Diff</th>
-        </tr>
+#export("al-east") {
+<table>
+    #embed("table-header")
     #loop(alEast, "team") {
-        <tr>
-            <td>#(team.name)</td>
-            <td>#(team.wins)</td>
-            <td>#(team.losses)</td>
-            <td>#(team.perc)</td>
-            <td>#(team.run_diff)</td>
-        </tr>
+    <tr>
+        <td>#(team.name)</td>
+        <td>#(team.wins)</td>
+        <td>#(team.losses)</td>
+        <td>#(team.perc)</td>
+        <td>#(team.run_diff)</td>
+    </tr>
     }
-    </table>
-    <h3>Central</h3>
-    <h3>West</h3>
-</body>
+</table>
+}
 
-</html>
+#export("al-central") {
+<table>
+    #embed("table-header")
+    #loop(alCentral, "team") {
+    <tr>
+        <td>#(team.name)</td>
+        <td>#(team.wins)</td>
+        <td>#(team.losses)</td>
+        <td>#(team.perc)</td>
+        <td>#(team.run_diff)</td>
+    </tr>
+    }
+</table>
+}
+
+#export("al-west") {
+<table>
+    #embed("table-header")
+    #loop(alWest, "team") {
+    <tr>
+        <td>#(team.name)</td>
+        <td>#(team.wins)</td>
+        <td>#(team.losses)</td>
+        <td>#(team.perc)</td>
+        <td>#(team.run_diff)</td>
+    </tr>
+    }
+</table>
+}
+
+#export("nl-east") {
+<table>
+    #embed("table-header")
+    #loop(nlEast, "team") {
+    <tr>
+        <td>#(team.name)</td>
+        <td>#(team.wins)</td>
+        <td>#(team.losses)</td>
+        <td>#(team.perc)</td>
+        <td>#(team.run_diff)</td>
+    </tr>
+    }
+</table>
+}
+
+#export("nl-central") {
+<table>
+    #embed("table-header")
+    #loop(nlCentral, "team") {
+    <tr>
+        <td>#(team.name)</td>
+        <td>#(team.wins)</td>
+        <td>#(team.losses)</td>
+        <td>#(team.perc)</td>
+        <td>#(team.run_diff)</td>
+    </tr>
+    }
+</table>
+}
+
+#export("nl-west") {
+<table>
+    #embed("table-header")
+    #loop(nlWest, "team") {
+    <tr>
+        <td>#(team.name)</td>
+        <td>#(team.wins)</td>
+        <td>#(team.losses)</td>
+        <td>#(team.perc)</td>
+        <td>#(team.run_diff)</td>
+    </tr>
+    }
+</table>
+}

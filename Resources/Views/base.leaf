@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MLB Standings</title>
+    <link rel="stylesheet" href="/styles/app.css">
+</head>
+
+<body>
+    <h2>American League</h2>
+    <h3>East</h3>
+    #import("al-east")
+    <h3>Central</h3>
+    #import("al-central")
+    <h3>West</h3>
+    #import("al-west")
+    <h2>National League</h2>
+    <h3>East</h3>
+    #import("nl-east")
+    <h3>Central</h3>
+    #import("nl-central")
+    <h3>West</h3>
+    #import("nl-west")
+</body>
+
+</html>

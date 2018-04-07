@@ -1,0 +1,9 @@
+.DS_Store
+.git
+.gitignore
+heroku.yml
+docker-compose*yml
+.env
+.build
+.dockerignore
+Dockerfile*

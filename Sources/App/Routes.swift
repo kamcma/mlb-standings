@@ -1,8 +1,8 @@
+import Routing
 import Vapor
-import HTTP
 
-extension Droplet {
-    func setupRoutes(drop: Droplet) throws {
-        get("/", handler: Controller(view).index)
+public func routes(_ router: Router) throws {
+    router.get("hello") { req in
+        return "Hello, world!"
     }
 }

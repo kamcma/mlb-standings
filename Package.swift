@@ -1,18 +1,15 @@
+// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
-    name: "baseball",
-    targets: [
-        Target(name: "App"),
-        Target(name: "Run", dependencies: ["App"])
-    ],
+    name: "MLBStandings",
     dependencies: [
-        .Package(url: "https://github.com/vapor/vapor.git", majorVersion: 2),
-        .Package(url: "https://github.com/vapor/leaf-provider.git", majorVersion: 1),
-        .Package(url: "https://github.com/vapor-community/postgresql-provider.git", majorVersion: 2),
-        .Package(url: "https://github.com/kamcma/mlb-swift.git", majorVersion: 0)
+        .package(url: "https://github.com/vapor/vapor.git", from: "3.0.0-rc.2")
     ],
-    exclude: [
-        "Config"
+    targets: [
+        .target(name: "MLBAPI", dependencies: []),
+        .target(name: "App", dependencies: ["Vapor"]),
+        .target(name: "Run", dependencies: ["App"]),
+        .testTarget(name: "AppTests", dependencies: ["App"])
     ]
 )

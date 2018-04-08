@@ -1,91 +1,120 @@
-struct StandingsResponse: Codable {
-    let Copyright: String
-    let Divisions: [Division]
+public struct StandingsResponse: Codable {
+    public let copyright: String
+    public let divisions: [Division]
     
     private enum CodingKeys: String, CodingKey {
-        case Copyright = "copyright"
-        case Divisions = "records"
+        case copyright = "copyright"
+        case divisions = "records"
     }
 }
 
-struct Division: Codable {
-    let StandingsType: StandingsType
-    let League: UnnamedMLBEntity
-    let Division: UnnamedMLBEntity
-    let LastUpdated: String
-    let Teams: [Team]
+public struct Division: Codable {
+    public let standingsType: StandingsType
+    public let league: UnnamedMLBEntity
+    public let division: UnnamedMLBEntity
+    public let lastUpdated: String
+    public let teams: [Team]
     
     private enum CodingKeys: String, CodingKey {
-        case StandingsType = "standingsType"
-        case League = "league"
-        case Division = "division"
-        case LastUpdated = "lastUpdated"
-        case Teams = "teamRecords"
+        case standingsType = "standingsType"
+        case league = "league"
+        case division = "division"
+        case lastUpdated = "lastUpdated"
+        case teams = "teamRecords"
     }
 }
 
-struct UnnamedMLBEntity: Codable {
-    let Id: Int
-    let Link: String
+public struct UnnamedMLBEntity: Codable {
+    public let id: Int
+    public let link: String
     
     private enum CodingKeys: String, CodingKey {
-        case Id = "id"
-        case Link = "link"
+        case id = "id"
+        case link = "link"
     }
 }
 
-struct Team: Codable {
-    let team: NamedMLBEntity
-    let streak: Streak
-    let divisionRank, leagueRank, wildCardRank, sportRank: String
-    let gamesPlayed: Int
-    let gamesBack, wildCardGamesBack, leagueGamesBack: String
-    //let springLeagueGamesBack: EGamesBack
-    let sportGamesBack, divisionGamesBack: String
-    //let conferenceGamesBack: EGamesBack
-    let leagueRecord: Record
-    let lastUpdated: String
-    let records: Records
-    let runsAllowed, runsScored: Int
-    let divisionChamp, divisionLeader, hasWildcard, clinched: Bool
-    let eliminationNumber: String
-    let wins, losses, runDifferential: Int
-    let wildCardEliminationNumber: String?
+public struct Team: Codable {
+    public let team: NamedMLBEntity
+    public let streak: Streak
+    public let divisionRank, leagueRank, wildCardRank, sportRank: String
+    public let gamesPlayed: Int
+    public let gamesBack, wildCardGamesBack, leagueGamesBack: String
+    //public let springLeagueGamesBack: EGamesBack
+    public let sportGamesBack, divisionGamesBack: String
+    //public let conferenceGamesBack: EGamesBack
+    public let leagueRecord: Record
+    public let lastUpdated: String
+    public let records: Records
+    public let runsAllowed, runsScored: Int
+    public let divisionChamp, divisionLeader, hasWildcard, clinched: Bool
+    public let eliminationNumber: String
+    public let wins, losses, runDifferential: Int
+    public let wildCardEliminationNumber: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case team = "team"
+        case streak = "streak"
+        case divisionRank = "divisionRank"
+        case leagueRank = "leagueRank"
+        case wildCardRank = "wildCardRank"
+        case sportRank = "sportRank"
+        case gamesPlayed = "gamesPlayed"
+        case gamesBack = "gamesBack"
+        case wildCardGamesBack = "wildCardGamesBack"
+        case leagueGamesBack = "leagueGamesBack"
+        case sportGamesBack = "sportGamesBack"
+        case divisionGamesBack = "divisionGamesBack"
+        case leagueRecord = "leagueRecord"
+        case lastUpdated = "lastUpdated"
+        case records = "records"
+        case runsAllowed = "runsAllowed"
+        case runsScored = "runsScored"
+        case divisionChamp = "divisionChamp"
+        case divisionLeader = "divisionLeader"
+        case hasWildcard = "hasWildcard"
+        case clinched = "clinched"
+        case eliminationNumber = "eliminationNumber"
+        case wins = "wins"
+        case losses = "losses"
+        case runDifferential = "runDifferential"
+        case wildCardEliminationNumber = "wildCardEliminationNumber"
+    }
 }
 
 //enum EGamesBack: String, Codable {
 //    case empty = "-"
 //}
 
-struct Record: Codable {
-    let Wins, Losses: Int
-    let Pct: String
-    let Division: NamedMLBEntity?
-    let SplitType: SplitType?
-    let League: NamedMLBEntity?
+public struct Record: Codable {
+    public let wins, losses: Int
+    public let pct: String
+    public let division: NamedMLBEntity?
+    public let splitType: SplitType?
+    public let league: NamedMLBEntity?
     
     private enum CodingKeys: String, CodingKey {
-        case Wins = "wins"
-        case Losses = "losses"
-        case Pct = "pct"
-        case Division = "division"
-        case SplitType = "type"
-        case League = "league"
+        case wins = "wins"
+        case losses = "losses"
+        case pct = "pct"
+        case division = "division"
+        case splitType = "type"
+        case league = "league"
     }
 }
 
-struct NamedMLBEntity: Codable {
-    let Id: Int
-    let Name, Link: String
+public struct NamedMLBEntity: Codable {
+    public let id: Int
+    public let name, link: String
     
     private enum CodingKeys: String, CodingKey {
-        case Id = "id"
-        case Name = "name"
-        case Link = "link"
+        case id = "id"
+        case name = "name"
+        case link = "link"
     }
 }
 
-enum SplitType: String, Codable {
+public enum SplitType: String, Codable {
     case away = "away"
     case day = "day"
     case extraInning = "extraInning"
@@ -102,7 +131,7 @@ enum SplitType: String, Codable {
     case xWinLossSeason = "xWinLossSeason"
 }
 
-enum StandingsType: String, Codable {
+public enum StandingsType: String, Codable {
     case regularSeason = "regularSeason"
     case wildCard = "wildCard"
     case divisionLeaders = "divisionLeaders"
@@ -110,32 +139,32 @@ enum StandingsType: String, Codable {
     case firstHalf = "firstHalf"
 }
 
-struct Records: Codable {
-    let SplitRecords, DivisionRecords, OverallRecords, LeagueRecords: [Record]
-    let ExpectedRecords: [Record]
+public struct Records: Codable {
+    public let splitRecords, divisionRecords, overallRecords, leagueRecords: [Record]
+    public let expectedRecords: [Record]
     
     private enum CodingKeys: String, CodingKey {
-        case SplitRecords = "splitRecords"
-        case DivisionRecords = "divisionRecords"
-        case OverallRecords = "overallRecords"
-        case LeagueRecords = "leagueRecords"
-        case ExpectedRecords = "expectedRecords"
+        case splitRecords = "splitRecords"
+        case divisionRecords = "divisionRecords"
+        case overallRecords = "overallRecords"
+        case leagueRecords = "leagueRecords"
+        case expectedRecords = "expectedRecords"
     }
 }
 
-struct Streak: Codable {
-    let StreakType: StreakType
-    let StreakNumber: Int
-    let StreakCode: String
+public struct Streak: Codable {
+    public let streakType: StreakType
+    public let streakNumber: Int
+    public let streakCode: String
     
     private enum CodingKeys: String, CodingKey {
-        case StreakType = "streakType"
-        case StreakNumber = "streakNumber"
-        case StreakCode = "streakCode"
+        case streakType = "streakType"
+        case streakNumber = "streakNumber"
+        case streakCode = "streakCode"
     }
 }
 
-enum StreakType: String, Codable {
+public enum StreakType: String, Codable {
     case losses = "losses"
     case wins = "wins"
 }

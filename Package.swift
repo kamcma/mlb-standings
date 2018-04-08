@@ -8,7 +8,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "MLBAPI", dependencies: []),
-        .target(name: "App", dependencies: ["Vapor"]),
+        .target(name: "App", dependencies: ["Vapor", "MLBAPI"]),
         .target(name: "Run", dependencies: ["App"]),
         .testTarget(name: "AppTests", dependencies: ["App"])
     ]

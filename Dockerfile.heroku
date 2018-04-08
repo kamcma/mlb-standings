@@ -1,9 +1,8 @@
 ARG SWIFT_VERSION=4.1
 
-# FROM swift:${SWIFT_VERSION}
 FROM ibmcom/swift-ubuntu:${SWIFT_VERSION}
-
 WORKDIR /app
+
 COPY Package.swift .
 COPY Package.resolved .
 RUN swift package resolve
@@ -11,15 +10,9 @@ RUN swift package resolve
 COPY . .
 RUN swift build -c release
 
-# FROM ubuntu:16.04
 FROM ibmcom/swift-ubuntu-runtime:${SWIFT_VERSION}
-
-# RUN apt-get -qq update && apt-get install -y \
-#     libicu55 libxml2 libbsd0 libcurl3 libatomic1 \
-#     && rm -r /var/lib/apt/lists/*
-
 WORKDIR /app
-# COPY --from=0 /usr/lib/swift/ /usr/lib/
+
 COPY --from=0 /app/.build/x86_64-unknown-linux/release/Run .
 
 CMD ./Run --env production --hostname 0.0.0.0 --port $PORT

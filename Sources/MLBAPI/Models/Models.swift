@@ -27,11 +27,6 @@ public struct Division: Codable {
 public struct UnnamedMLBEntity: Codable {
     public let id: Int
     public let link: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case link = "link"
-    }
 }
 
 public struct Team: Codable {
@@ -92,26 +87,11 @@ public struct Record: Codable {
     public let division: NamedMLBEntity?
     public let splitType: SplitType?
     public let league: NamedMLBEntity?
-    
-    private enum CodingKeys: String, CodingKey {
-        case wins = "wins"
-        case losses = "losses"
-        case pct = "pct"
-        case division = "division"
-        case splitType = "type"
-        case league = "league"
-    }
 }
 
 public struct NamedMLBEntity: Codable {
     public let id: Int
     public let name, link: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case name = "name"
-        case link = "link"
-    }
 }
 
 public enum SplitType: String, Codable {
@@ -142,26 +122,12 @@ public enum StandingsType: String, Codable {
 public struct Records: Codable {
     public let splitRecords, divisionRecords, overallRecords, leagueRecords: [Record]
     public let expectedRecords: [Record]
-    
-    private enum CodingKeys: String, CodingKey {
-        case splitRecords = "splitRecords"
-        case divisionRecords = "divisionRecords"
-        case overallRecords = "overallRecords"
-        case leagueRecords = "leagueRecords"
-        case expectedRecords = "expectedRecords"
-    }
 }
 
 public struct Streak: Codable {
     public let streakType: StreakType
     public let streakNumber: Int
     public let streakCode: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case streakType = "streakType"
-        case streakNumber = "streakNumber"
-        case streakCode = "streakCode"
-    }
 }
 
 public enum StreakType: String, Codable {

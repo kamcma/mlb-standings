@@ -3,7 +3,6 @@ import Routing
 import Vapor
 import MLBAPI
 
-
 public func routes(_ router: Router) throws {
 
     router.get("/") { req -> Future<String> in
@@ -13,7 +12,7 @@ public func routes(_ router: Router) throws {
             .flatMap(to: String.self) { res in
                 return try res.content.decode(StandingsResponse.self)
                     .map(to: String.self) { standingsRes in
-                        let teams: [Team] = standingsRes.divisions.flatMap { $0.teams }
+                        let teams = standingsRes.divisions.flatMap { $0.teams }
                         let records = teams.map { team in
                             return (team.team.name, team.wins, team.losses)
                         }

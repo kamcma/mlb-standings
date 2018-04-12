@@ -6,10 +6,14 @@ import MLBAPI
 public func routes(_ router: Router) throws {
 
     router.get("/") { req -> Future<String> in
-        let year: Int = Calendar.current.component(.year, from: Date())
+        let mlbStatsApi = "http://statsapi.mlb.com:80/api/v1/"
+        let year = Calendar.current.component(.year, from: Date())
+        let endpoint = "standings?leagueId=103,104&season=\(year)"
+
         return try req.make(Client.self)
-            .get("http://statsapi.mlb.com:80/api/v1/standings?leagueId=103,104&season=\(year)")
+            .get(mlbStatsApi + endpoint)
             .flatMap(to: String.self) { res in
+                
                 return try res.content.decode(StandingsResponse.self)
                     .map(to: String.self) { standingsRes in
                         let teams = standingsRes.divisions.flatMap { $0.teams }
@@ -21,7 +25,5 @@ public func routes(_ router: Router) throws {
                         }
                     }
             }
-
     }
-
 }

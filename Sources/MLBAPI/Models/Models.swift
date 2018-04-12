@@ -1,20 +1,22 @@
-public struct StandingsResponse: Codable {
+import Foundation
+
+public struct StandingsResponse: Decodable {
     public let copyright: String
     public let divisions: [Division]
-    
+
     private enum CodingKeys: String, CodingKey {
         case copyright = "copyright"
         case divisions = "records"
     }
 }
 
-public struct Division: Codable {
+public struct Division: Decodable {
     public let standingsType: StandingsType
     public let league: UnnamedMLBEntity
     public let division: UnnamedMLBEntity
-    public let lastUpdated: String
+    public let lastUpdated: Date
     public let teams: [Team]
-    
+
     private enum CodingKeys: String, CodingKey {
         case standingsType = "standingsType"
         case league = "league"
@@ -24,12 +26,28 @@ public struct Division: Codable {
     }
 }
 
-public struct UnnamedMLBEntity: Codable {
+extension Division {
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        standingsType = try container.decode(StandingsType.self, forKey: .standingsType)
+        league = try container.decode(UnnamedMLBEntity.self, forKey: .league)
+        division = try container.decode(UnnamedMLBEntity.self, forKey: .division)
+        let lastUpdatedString = try container.decode(String.self, forKey: .lastUpdated)
+        guard let lastUpdatedTemp = Formatter.iso8601ms.date(from: lastUpdatedString) else {
+            throw DecodingError.dataCorruptedError(forKey: .lastUpdated, in: container, debugDescription: "Expected date string to be ISO8601-formatted.")
+        }
+        lastUpdated = lastUpdatedTemp
+        teams = try container.decode([Team].self, forKey: .teams)
+    }
+}
+
+public struct UnnamedMLBEntity: Decodable {
     public let id: Int
     public let link: String
 }
 
-public struct Team: Codable {
+public struct Team: Decodable {
     public let team: NamedMLBEntity
     public let streak: Streak
     public let divisionRank, leagueRank, wildCardRank, sportRank: String
@@ -39,14 +57,14 @@ public struct Team: Codable {
     public let sportGamesBack, divisionGamesBack: String
     //public let conferenceGamesBack: EGamesBack
     public let leagueRecord: Record
-    public let lastUpdated: String
+    public let lastUpdated: Date
     public let records: Records
     public let runsAllowed, runsScored: Int
     public let divisionChamp, divisionLeader, hasWildcard, clinched: Bool
     public let eliminationNumber: String
     public let wins, losses, runDifferential: Int
     public let wildCardEliminationNumber: String?
-    
+
     private enum CodingKeys: String, CodingKey {
         case team = "team"
         case streak = "streak"
@@ -81,7 +99,7 @@ public struct Team: Codable {
 //    case empty = "-"
 //}
 
-public struct Record: Codable {
+public struct Record: Decodable {
     public let wins, losses: Int
     public let pct: String
     public let division: NamedMLBEntity?
@@ -89,12 +107,12 @@ public struct Record: Codable {
     public let league: NamedMLBEntity?
 }
 
-public struct NamedMLBEntity: Codable {
+public struct NamedMLBEntity: Decodable {
     public let id: Int
     public let name, link: String
 }
 
-public enum SplitType: String, Codable {
+public enum SplitType: String, Decodable {
     case away = "away"
     case day = "day"
     case extraInning = "extraInning"
@@ -111,7 +129,7 @@ public enum SplitType: String, Codable {
     case xWinLossSeason = "xWinLossSeason"
 }
 
-public enum StandingsType: String, Codable {
+public enum StandingsType: String, Decodable {
     case regularSeason = "regularSeason"
     case wildCard = "wildCard"
     case divisionLeaders = "divisionLeaders"
@@ -119,18 +137,18 @@ public enum StandingsType: String, Codable {
     case firstHalf = "firstHalf"
 }
 
-public struct Records: Codable {
+public struct Records: Decodable {
     public let splitRecords, divisionRecords, overallRecords, leagueRecords: [Record]
     public let expectedRecords: [Record]
 }
 
-public struct Streak: Codable {
+public struct Streak: Decodable {
     public let streakType: StreakType
     public let streakNumber: Int
     public let streakCode: String
 }
 
-public enum StreakType: String, Codable {
+public enum StreakType: String, Decodable {
     case losses = "losses"
     case wins = "wins"
 }

@@ -5,8 +5,7 @@ public struct StandingsResponse: Decodable {
     public let divisions: [Division]
 
     private enum CodingKeys: String, CodingKey {
-        case copyright = "copyright"
-        case divisions = "records"
+        case copyright, divisions = "records"
     }
 }
 
@@ -18,10 +17,7 @@ public struct Division: Decodable {
     public let teams: [Team]
 
     private enum CodingKeys: String, CodingKey {
-        case standingsType = "standingsType"
-        case league = "league"
-        case division = "division"
-        case lastUpdated = "lastUpdated"
+        case standingsType, league, division, lastUpdated
         case teams = "teamRecords"
     }
 }
@@ -35,7 +31,11 @@ extension Division {
         division = try container.decode(UnnamedMLBEntity.self, forKey: .division)
         let lastUpdatedString = try container.decode(String.self, forKey: .lastUpdated)
         guard let lastUpdatedTemp = Formatter.iso8601ms.date(from: lastUpdatedString) else {
-            throw DecodingError.dataCorruptedError(forKey: .lastUpdated, in: container, debugDescription: "Expected date string to be ISO8601-formatted.")
+            throw DecodingError.dataCorruptedError(
+                forKey: .lastUpdated,
+                in: container,
+                debugDescription: "Expected date string to be ISO8601-formatted."
+            )
         }
         lastUpdated = lastUpdatedTemp
         teams = try container.decode([Team].self, forKey: .teams)
@@ -66,32 +66,24 @@ public struct Team: Decodable {
     public let wildCardEliminationNumber: String?
 
     private enum CodingKeys: String, CodingKey {
-        case team = "team"
-        case streak = "streak"
-        case divisionRank = "divisionRank"
-        case leagueRank = "leagueRank"
-        case wildCardRank = "wildCardRank"
-        case sportRank = "sportRank"
-        case gamesPlayed = "gamesPlayed"
-        case gamesBack = "gamesBack"
-        case wildCardGamesBack = "wildCardGamesBack"
-        case leagueGamesBack = "leagueGamesBack"
-        case sportGamesBack = "sportGamesBack"
-        case divisionGamesBack = "divisionGamesBack"
-        case leagueRecord = "leagueRecord"
-        case lastUpdated = "lastUpdated"
-        case records = "records"
-        case runsAllowed = "runsAllowed"
-        case runsScored = "runsScored"
-        case divisionChamp = "divisionChamp"
-        case divisionLeader = "divisionLeader"
-        case hasWildcard = "hasWildcard"
-        case clinched = "clinched"
-        case eliminationNumber = "eliminationNumber"
-        case wins = "wins"
-        case losses = "losses"
-        case runDifferential = "runDifferential"
-        case wildCardEliminationNumber = "wildCardEliminationNumber"
+        case team
+        case streak
+        case divisionRank, leagueRank, wildCardRank
+        case sportRank
+        case gamesPlayed
+        case gamesBack, leagueGamesBack, wildCardGamesBack
+        case sportGamesBack
+        case divisionGamesBack
+        case leagueRecord
+        case lastUpdated
+        case records
+        case runsScored, runsAllowed
+        case divisionChamp
+        case divisionLeader
+        case hasWildcard
+        case clinched, eliminationNumber, wildCardEliminationNumber
+        case wins, losses
+        case runDifferential
     }
 }
 
@@ -113,28 +105,19 @@ public struct NamedMLBEntity: Decodable {
 }
 
 public enum SplitType: String, Decodable {
-    case away = "away"
-    case day = "day"
-    case extraInning = "extraInning"
-    case grass = "grass"
-    case home = "home"
-    case lastTen = "lastTen"
-    case night = "night"
-    case oneRun = "oneRun"
-    case turf = "turf"
-    case typeLeft = "left"
-    case typeRight = "right"
-    case winners = "winners"
-    case xWinLoss = "xWinLoss"
-    case xWinLossSeason = "xWinLossSeason"
+    case home, away
+    case day, night
+    case extraInning
+    case grass, turf
+    case lastTen
+    case oneRun
+    case typeLeft, typeRight
+    case winners
+    case xWinLoss, xWinLossSeason
 }
 
 public enum StandingsType: String, Decodable {
-    case regularSeason = "regularSeason"
-    case wildCard = "wildCard"
-    case divisionLeaders = "divisionLeaders"
-    case wildCardWithLeaders = "wildCardWithLeaders"
-    case firstHalf = "firstHalf"
+    case regularSeason, wildCard, divisionLeaders, wildCardWithLeaders, firstHalf
 }
 
 public struct Records: Decodable {
@@ -149,6 +132,5 @@ public struct Streak: Decodable {
 }
 
 public enum StreakType: String, Decodable {
-    case losses = "losses"
-    case wins = "wins"
+    case wins, losses
 }

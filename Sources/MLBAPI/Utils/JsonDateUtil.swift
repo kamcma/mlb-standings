@@ -18,6 +18,9 @@ extension JSONDecoder.DateDecodingStrategy {
         if let date = Formatter.iso8601ms.date(from: string) {
             return date
         }
-        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Expected date string to be ISO8601-formatted.")
+        throw DecodingError.dataCorruptedError(
+            in: container,
+            debugDescription: "Expected date string to be ISO8601-formatted."
+        )
     }
 }

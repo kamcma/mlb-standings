@@ -12,18 +12,15 @@ public func routes(_ router: Router) throws {
 
         return try req.make(Client.self)
             .get(mlbStatsApi + endpoint)
-            .flatMap(to: String.self) { res in
-                
-                return try res.content.decode(StandingsResponse.self)
-                    .map(to: String.self) { standingsRes in
-                        let teams = standingsRes.divisions.flatMap { $0.teams }
-                        let records = teams.map { team in
-                            return (team.team.name, team.wins, team.losses)
-                        }
-                        return records.reduce("") { str, record in
-                            return str + "\(record.0): \(record.1) - \(record.2)\n"
-                        }
-                    }
+            .map(to: String.self) { res -> String in
+                let standings = try res.content.syncDecode(StandingsResponse.self)
+                let teams = standings.divisions.flatMap { $0.teams }
+                let records = teams.map { team in
+                    return (team.team.name, team.wins, team.losses)
+                }
+                return records.reduce("") { str, record in
+                    return str + "\(record.0): \(record.1) - \(record.2)\n"
+                }
             }
     }
 }

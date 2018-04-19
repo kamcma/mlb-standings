@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/vapor/core.git",
         "state": {
           "branch": null,
-          "revision": "ce64e70a48adf54835d040ba4c4dab431e2cd020",
-          "version": "3.1.1"
+          "revision": "c61a29ef08e7c8b3e836954269678c5a8fa31f3f",
+          "version": "3.1.2"
         }
       },
       {
@@ -38,12 +38,12 @@
         }
       },
       {
-        "package": "Engine",
-        "repositoryURL": "https://github.com/vapor/engine.git",
+        "package": "HTTP",
+        "repositoryURL": "https://github.com/vapor/http.git",
         "state": {
           "branch": null,
-          "revision": "2419e37d689b78c9197b2f38cd8f2901cd7dcf9e",
-          "version": "3.0.0-rc.2.3.1"
+          "revision": "2cb664097006e3fda625934079b51c90438947e1",
+          "version": "3.0.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
           "branch": null,
-          "revision": "3275ff7c9c791a628631c2c51b39fd94346b2492",
-          "version": "1.4.2"
+          "revision": "91ef938c60061784ba8734a73d61b7810494f9b3",
+          "version": "1.5.0"
         }
       },
       {
@@ -119,6 +119,15 @@
         }
       },
       {
+        "package": "URLEncodedForm",
+        "repositoryURL": "https://github.com/vapor/url-encoded-form.git",
+        "state": {
+          "branch": null,
+          "revision": "8448fa943057c01220f6a940d3b1b8e9fd92a96e",
+          "version": "1.0.2"
+        }
+      },
+      {
         "package": "Validation",
         "repositoryURL": "https://github.com/vapor/validation.git",
         "state": {
@@ -132,8 +141,17 @@
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
           "branch": null,
-          "revision": "26b5c4032f236cc78e6fd3a51ac6d8aceb5a3a4f",
-          "version": "3.0.0-rc.2.4.1"
+          "revision": "95f94041400f54d0442d1dd5f12f91868d1a2a1c",
+          "version": "3.0.0-rc.2.6"
+        }
+      },
+      {
+        "package": "WebSocket",
+        "repositoryURL": "https://github.com/vapor/websocket.git",
+        "state": {
+          "branch": null,
+          "revision": "23acd21aa37a200faa2f5d5525c974efa6b5676c",
+          "version": "1.0.0"
         }
       }
     ]

@@ -50,7 +50,7 @@ public struct UnnamedMLBEntity: Decodable {
 public struct Team: Decodable {
     public let team: NamedMLBEntity
     public let streak: Streak
-    public let divisionRank, leagueRank, wildCardRank, sportRank: String
+    public let divisionRank, leagueRank, sportRank: String
     public let gamesPlayed: Int
     public let gamesBack, wildCardGamesBack, leagueGamesBack: String
     //public let springLeagueGamesBack: EGamesBack
@@ -68,7 +68,7 @@ public struct Team: Decodable {
     private enum CodingKeys: String, CodingKey {
         case team
         case streak
-        case divisionRank, leagueRank, wildCardRank
+        case divisionRank, leagueRank
         case sportRank
         case gamesPlayed
         case gamesBack, leagueGamesBack, wildCardGamesBack

@@ -1,5 +1,4 @@
 import Foundation
-import Routing
 import Vapor
 import MLBAPI
 
@@ -12,7 +11,7 @@ public func routes(_ router: Router) throws {
 
         return try req.make(Client.self)
             .get(mlbStatsApi + endpoint)
-            .map(to: String.self) { res -> String in
+            .map { res in
                 let standings = try res.content.syncDecode(StandingsResponse.self)
                 let teams = standings.divisions.flatMap { $0.teams }
                 let records = teams.map { team in
